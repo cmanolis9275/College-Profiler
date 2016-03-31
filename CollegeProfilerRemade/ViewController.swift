@@ -54,6 +54,7 @@ class ViewController: UITableViewController
     func configureTextForCell(cell: UITableViewCell, withCollege item: College)
     {
         let label = cell.viewWithTag(1) as! UILabel
+        label.text = item.text
     }
     
 //    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
