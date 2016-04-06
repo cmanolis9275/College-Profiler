@@ -14,11 +14,19 @@ class College
     var location: String
     var numberOfStudents:Int
     
+    
     init(Name : String, Location: String, Students: Int)
     {
         self.name = Name
         self.location = Location
         self.numberOfStudents = Students
+    }
+    
+    init()
+    {
+        self.name = "Name"
+        self.location = "Location"
+        self.numberOfStudents = 0
     }
     
 }

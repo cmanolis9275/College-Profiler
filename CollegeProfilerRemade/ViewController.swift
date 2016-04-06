@@ -6,25 +6,27 @@
 //  Copyright © 2016 Christos Manolis. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-class ViewController: UITableViewController
+class ViewController: UIViewController, UITableViewDataSource
 {
-    var college = [College]()
+    var collegeArray = [College]()
     
+    @IBOutlet var myCollege: UITableView!
     required init? (coder aDecoder: NSCoder)
     {
-        college = [College]()
-        let college1 = College(Name: "Test", Location: "Somewhere", Students: 3)
-        let college2 = College(Name: "Test2", Location: "Somewhere2", Students: 4)
-        let college3 = College(Name: "Test3", Location: "Somewhere3", Students: 5)
-        let college4 = College(Name: "Test4", Location: "Somewhere4", Students: 6)
+        collegeArray = [College]()
+        var college1 = College(Name: "Test", Location: "Somewhere", Students: 3)
+        var college2 = College(Name: "Test2", Location: "Somewhere2", Students: 4)
+        var college3 = College(Name: "Test3", Location: "Somewhere3", Students: 5)
+        var college4 = College(Name: "Test4", Location: "Somewhere4", Students: 6)
 
         
-        college.append(college1)
-        college.append(college2)
-        college.append(college3)
-        college.append(college4)
+        collegeArray.append(college1)
+        collegeArray.append(college2)
+        collegeArray.append(college3)
+        collegeArray.append(college4)
         
         
         
@@ -37,34 +39,48 @@ class ViewController: UITableViewController
         
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return college.count
+        return collegeArray.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("College", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! UITableViewCell
         
-        let item = college[indexPath.row]
+        cell.textLabel?.text = collegeArray[indexPath.row].name
+        
         return cell
         
+    }
+    
+     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if let cell = tableView.cellForRowAtIndexPath(indexPath)
+        {
+            let item = collegeArray[indexPath.row]
+        }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     func configureTextForCell(cell: UITableViewCell, withCollege item: College)
     {
         let label = cell.viewWithTag(1) as! UILabel
-        label.text = item.text
+        //label.text = item.text
     }
     
-//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
-//    {
-//        if let cell = tableView.cellForRowAtIndexPath(indexPath)
-//        {
-//            let item = college[indexPath.row]
-//            item.toggle
-//        }
-//    }
+    func addCollegeViewController(controller: AddCollegeViewController, didFinishAddingCollege: College)
+    {
+        let newRowIndex = collegeArray.count
+       // college.append(newRowIndex)
+        
+    }
+
+    
+    
+    
     
     
 
